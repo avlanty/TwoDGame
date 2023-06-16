@@ -1,6 +1,7 @@
 package com.yup.twodgame;
 
 import entity.Player;
+import tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,14 +21,12 @@ public class GamePanel extends JPanel implements Runnable{
     // fps
     int FPS = 60;
 
+    TileManager tileManager = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread; // you can start and stop a thread, this automatically calls the @Override run method
     Player player = new Player(this, keyH);
 
-    // sets player default position
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
+    
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
@@ -49,6 +48,8 @@ public class GamePanel extends JPanel implements Runnable{
     public void paintComponent(Graphics graphics){ // graphics class has many functions to draw objects on the screen
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D)graphics; // Graphics2D has more functions than graphics
+        tileManager.getTileImage();
+        tileManager.draw(graphics2D);
         player.draw(graphics2D);
         graphics2D.dispose(); // disposes the graphics context and releases resources the system is using
     }
