@@ -20,6 +20,16 @@ public class TileManager {
         try{
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
+            tile[1] = new Tile();
+            tile[1].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
+            tile[2] = new Tile();
+            tile[2].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
+            tile[3] = new Tile();
+            tile[3].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
+            tile[4] = new Tile();
+            tile[4].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
+            tile[5] = new Tile();
+            tile[5].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/grass.png"));
         }
         catch(IOException e){
             e.printStackTrace();
@@ -28,5 +38,10 @@ public class TileManager {
 
     public void draw(Graphics2D graphics2D){
         graphics2D.drawImage(tile[0].image, 0,0, gp.tileSize, gp.tileSize, null);
+        graphics2D.drawImage(tile[1].image, 48,0, gp.tileSize, gp.tileSize, null);
+        graphics2D.drawImage(tile[2].image, 96,0, gp.tileSize, gp.tileSize, null);
+        graphics2D.drawImage(tile[3].image, 144,0, gp.tileSize, gp.tileSize, null);
+        graphics2D.drawImage(tile[4].image, 192,0, gp.tileSize, gp.tileSize, null);
+        graphics2D.drawImage(tile[5].image, 240,0, gp.tileSize, gp.tileSize, null);
     }
 }
