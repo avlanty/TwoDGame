@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         this.setDoubleBuffered(true); // all drawing will be done from offscreen buffering
         this.addKeyListener(keyH);
         this.setFocusable(true); // GamePanel "focuses" on receiving key inputs

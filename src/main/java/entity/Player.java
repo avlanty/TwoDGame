@@ -44,7 +44,7 @@ public class Player extends Entity{
         direction = "down";
     }
 
-    public void update(){
+    public void update(){ // called 60 times per second, inside the gamelop
         if(keyH.upPressed){
             direction = "up";
             y -= speed;
@@ -61,24 +61,54 @@ public class Player extends Entity{
             direction = "right";
             x += speed;
         }
+        spriteCounter++; // player image changes in every 10 frames
+        if(spriteCounter > 10){
+            if(spriteNum == 1){
+                spriteNum = 2;
+            }
+            else if(spriteNum ==  2){
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
+        }
     }
 
     public void draw(Graphics2D graphics2D){
         BufferedImage image = null;
         switch(direction){
             case "up":
-                image = up1;
+                if(spriteNum == 1){
+                    image = up1;
+                }
+                if(spriteNum == 2){
+                    image = up2;
+                }
                 break;
             case "down":
-                image = down1;
+                if(spriteNum == 1){
+                    image = down1;
+                }
+                if(spriteNum == 2){
+                    image = down2;
+                }
                 break;
             case "left":
-                image = left1;
+                if(spriteNum == 1){
+                    image = left1;
+                }
+                if(spriteNum == 2){
+                    image = left2;
+                }
                 break;
             case "right":
-                image = right1;
+                if(spriteNum == 1){
+                    image = right1;
+                }
+                if(spriteNum == 2){
+                    image = right2;
+                }
                 break;
         }
-        graphics2D.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        graphics2D.drawImage(image, x, y, gp.tileSize, gp.tileSize, null); // image observer, you can't type here
     }
 }
