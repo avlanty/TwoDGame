@@ -15,7 +15,7 @@ public class TileManager {
     public TileManager(GamePanel gp){
         this.gp = gp;
         tile = new Tile[36]; // if you need more, you can always change this num
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
         loadMap();
     }
@@ -40,15 +40,15 @@ public class TileManager {
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;
-            while(col < gp.maxScreenCol && row < gp.maxScreenRow){
+            while(col < gp.maxWorldCol && row < gp.maxWorldRow){
                 String line = br.readLine(); // reading the line of the .txt file
-                while(col < gp.maxScreenCol){
+                while(col < gp.maxWorldCol){
                     String numbers[] = line.split(" ");
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                     col++;
                 }
-                if(col == gp.maxScreenCol){
+                if(col == gp.maxWorldCol){
                     col = 0;
                     row++;
                 }
@@ -60,20 +60,19 @@ public class TileManager {
     }
 
     public void draw(Graphics2D graphics2D){
-        int col = 0;
-        int row = 0;
-        int x = 0;
-        int y = 0;
-        while(col < gp.maxScreenCol && row < gp.maxScreenRow){
-            int tileNum = mapTileNum[col][row]; // tiles are stored here
-            graphics2D.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
-            col++;
-            x += gp.tileSize;
-            if(col == gp.maxScreenCol){
-                col = 0;
-                x = 0;
-                row++;
-                y += gp.tileSize;
+        int worldCol = 0;
+        int worldRow = 0;
+        while(worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow){
+            int tileNum = mapTileNum[worldCol][worldRow];// tiles are stored here
+            int worldX = worldCol * gp.tileSize; // takes tile spot * 48
+            int worldY = worldRow * gp.tileSize;
+            int screenX = worldX - gp.player.worldX + gp.player.screenX; // players position is always the center
+            int screenY = worldY - gp.player.worldY + gp.player.screenY; // offset the difference and gets the correct coordinates
+            graphics2D.drawImage(tile[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+            worldCol++;
+            if(worldCol == gp.maxWorldCol){
+                worldCol = 0;
+                worldRow++;
             }
         }
     }
