@@ -14,10 +14,10 @@ public class TileManager {
 
     public TileManager(GamePanel gp){
         this.gp = gp;
-        tile = new Tile[36]; // if you need more, you can always change this num
+        tile = new Tile[50]; // if you need more, you can always change this num
         mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
         getTileImage();
-        loadMap();
+        loadMap("/maps/world01.txt");
     }
 
     public void getTileImage(){
@@ -34,9 +34,9 @@ public class TileManager {
         }
     }
 
-    public void loadMap(){
+    public void loadMap(String filepath){
         try{
-            InputStream is = getClass().getResourceAsStream("/maps/map01.txt");
+            InputStream is = getClass().getResourceAsStream(filepath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
             int col = 0;
             int row = 0;
