@@ -28,6 +28,7 @@ public class TileManager {
             tile[1].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/stonepath.png"));
             tile[2] = new Tile();
             tile[2].image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/wavywater.png"));
+            tile[2].collision = true;
         }
         catch(IOException e){
             e.printStackTrace();
